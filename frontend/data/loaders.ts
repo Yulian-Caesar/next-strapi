@@ -1,11 +1,11 @@
 import qs from "qs";
 import { getStrapiURL } from "@/lib/utils";
-import { connection as noStore } from "next/server";
+// import { connection as noStore } from "next/server";
 
 const baseUrl = getStrapiURL();
 
 async function fetchData(url: string) {
-	noStore();
+	// noStore();
 	const authToken = null; // we will implement this later getAuthToken() later
 	const headers = {
 		method: "GET",
