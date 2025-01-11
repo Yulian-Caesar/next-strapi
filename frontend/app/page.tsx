@@ -1,21 +1,11 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button"
-
-async function getHomePageData(path: string) {
-  const baseUrl = 'http://localhost:1337';
-  try{
-    const res = await fetch(`${baseUrl}${path}`);
-    const data = await res.json();
-    return data
-  } catch(err) {
-    console.log(err)
-  }
-}
+import { Button } from "@/components/ui/button";
+import { HeroSection } from "@/components/custom/hero-section";
+import { FeatureSection } from "@/components/custom/features-section";
+import { getHomePageData } from "@/data/loaders";
 
 export default async function Home() {
-  const strapiData = await getHomePageData('/api/home-page');
-  const { title, description } = strapiData.data;
-
+  const strapiData = await getHomePageData();
+  const { title, description, blocks } = strapiData.data;
   return (
     <main className="container mx-auto py-6">
       <h1>{title}</h1>
@@ -23,6 +13,9 @@ export default async function Home() {
       <Button variant='secondary'>Click me 11</Button>
       <Button variant='outline'>Click me 2</Button>
       <Button variant='destructive'>Click me 3</Button>
+	    <HeroSection data={blocks[0]} />
+	    <FeatureSection data={blocks[1]} />
     </main>
   );
+  
 }
